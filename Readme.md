@@ -1,6 +1,6 @@
 <snippet>
-  <content><![CDATA[
-# ${1:Project Name}
+	<content>
+# ovs-scriptgen-rhel.py
 
 This simple script written in Python will generate network configuration 
 scripts integrating Open vSwitch  for RHEL-based Linux distributions like 
@@ -27,6 +27,6 @@ A big thank you to the Open vSwitch team!
 GNU General Public License version 3
 http://www.gnu.org/copyleft/gpl.html
 
-]]></content>
-  <tabTrigger>readme</tabTrigger>
+	</content>
+	<tabTrigger>readme</tabTrigger>
 </snippet>
