@@ -11,7 +11,7 @@ that should be placed in the /etc/sysconfig/network-scripts directory.
 The README.RHEL included with Open vSwitch explains how to use the optional
 Open vSwitch integration with RHEL network configuration scripts identifying
 all the attributes and values you can add to the scripts. This simple script
-try to help you to generate the content of those files answering some questions.
+tries to help you to generate the content of those files answering some questions.
 
 ## Usage
 
