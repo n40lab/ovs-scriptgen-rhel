@@ -1,5 +1,4 @@
-<snippet>
-	<content>
+<snippet>	
 # ovs-scriptgen-rhel.py
 
 This simple script written in Python will generate network configuration 
@@ -16,8 +15,19 @@ try to help you to generate the content of those files answering some questions.
 
 ## Usage
 
-You should need Python 2.x and the script has been tested with CentOS 7 and
-Python 2.7.5
+Install git on your system: yum install git
+
+Download ovs-scriptgen-rhel: git clone https://github.com/n40lab/ovs-scriptgen-rhel.git
+
+Execute: python ovs-scriptgen-rhel.py
+
+## Requirements
+
+Open vSwitch 2.3.x Long-Term Support. Previous and later versions could also work 
+but please beware, changes to RHEL integration have been modified from time to time.
+
+You should need Python 2.x. The script has been tested with CentOS 7 and
+Python 2.7.5.
 
 ## Credits
 
@@ -25,8 +35,5 @@ A big thank you to the Open vSwitch team!
 
 ## License
 GNU General Public License version 3
-http://www.gnu.org/copyleft/gpl.html
-
-	</content>
-	<tabTrigger>readme</tabTrigger>
+http://www.gnu.org/copyleft/gpl.html	
 </snippet>
