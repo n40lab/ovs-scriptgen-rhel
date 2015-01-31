@@ -98,7 +98,12 @@ def ask_for_remote_ip_tunnel():
                 if option_ask == 'n':
                     repeat_ip = True
 
-    return remote_ip
+    print 'Optional - Specify other options for tunnel interfaces as a space separated list of '
+    print 'column[:key]=value options, e.g the encryption key.'
+    print 'Use the man page for ovs-vswitchd.conf.db.5 for more information about Tunnel Configuration'
+
+    option_ask = raw_input('press Enter when finished \n')
+    return remote_ip + ' ' + option_ask
 
 
 def ask_for_type():
