@@ -1,7 +1,7 @@
 __author__ = "Miguel Cabrerizo"
 __copyright__ = "Copyright 2015, Miguel Cabrerizo - ArtemIT Labs"
 __license__ = "GPLv3"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __maintainer__ = "Miguel Cabrerizo"
 __email__ = "mcabrerizo@artemit.com.es"
 
@@ -179,18 +179,69 @@ def ask_for_static_ip_and_mask():
                 socket.inet_aton(mask)
             except socket.error:
                 print 'Wrong format. Please, try again'
-                mask=''
+                mask = ''
+
+        option_gateway = '?'
+        gateway = ''
+        while option_gateway not in ['y', 'n']:
+            option_gateway = raw_input('Do you want to add a gateway? (y/[n])?\n')
+            if not option_gateway or option_gateway == 'n':
+                option_gateway = 'n'
+            if option_gateway == 'y':
+                gateway = ''
+                while not gateway:
+                    gateway = raw_input('Specify the gateway in dot-decimal notation A.B.C.D (e.g 192.168.1.1):\n')
+                try:
+                    socket.inet_aton(gateway)
+                except socket.error:
+                    print 'Wrong format. Please, try again'
+                    gateway = ''
+
+        option_dns1 = '?'
+        dns1 = ''
+        dns2 = ''
+        while option_dns1 not in ['y', 'n']:
+            option_dns1 = raw_input('Do you want to add a DNS server? (y/[n])?\n')
+            if not option_dns1 or option_dns1 == 'n':
+                option_dns1 = 'n'
+            if option_dns1 == 'y':
+                dns1 = ''
+                while not dns1:
+                    dns1 = raw_input('Specify the DNS server address in dot-decimal notation ' +
+                                     'A.B.C.D (e.g 192.168.1.1):\n')
+                try:
+                    socket.inet_aton(dns1)
+                    option_dns2 = '?'
+                    while option_dns2 not in ['y', 'n']:
+                        option_dns2 = raw_input('Do you want to add another DNS server? (y/[n])?\n')
+                        if not option_dns2 or option_dns2 == 'n':
+                            option_dns2 = 'n'
+                        if option_dns2 == 'y':
+                            dns2 = ''
+                            while not dns2:
+                                dns2 = raw_input(
+                                    'Specify the DNS server address in dot-decimal notation ' +
+                                    'A.B.C.D (e.g 192.168.1.1):\n')
+                            try:
+                                socket.inet_aton(dns2)
+                            except socket.error:
+                                print 'Wrong format. Please, try again'
+                                dns2 = ''
+
+                except socket.error:
+                    print 'Wrong format. Please, try again'
+                    dns1 = ''
 
         option_ip = '?'
         while option_ip not in ['y','n']:
-            option_ip = raw_input('Are you happy with the ip and mask([y]/n)?\n')
+            option_ip = raw_input('Are you happy with your settings ([y]/n)?\n')
             if not option_ip or option_ip == 'y':
                 option_ip = 'y'
                 repeat_ip = False
             if option_ip == 'n':
                 repeat_ip = True
 
-    return ip, mask
+    return ip, mask, gateway, dns1, dns2
 
 
 def ask_for_extra():
@@ -261,6 +312,12 @@ def generate_config(arg_name, arg_type, arg_boot, arg_extra,
         print 'BOOTPROTO=static'
         print 'IPADDR='+arg_ip_address[0]
         print 'NETMASK='+arg_ip_address[1]
+        if arg_ip_address[2]:
+            print 'GATEWAY='+arg_ip_address[2]
+        if arg_ip_address[3]:
+            print 'DNS1='+arg_ip_address[3]
+        if arg_ip_address[4]:
+            print 'DNS2='+arg_ip_address[4]
 
     if arg_dhcp is not None:
         print 'OVSBOOTPROTO="dhcp"'
